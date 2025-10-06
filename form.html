@@ -1,0 +1,699 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>E-Dossier</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Google Font -->
+  <link href="fonts/google.css" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="fonts/LUCKY.CSS" rel="stylesheet">
+
+  <style>
+ /* Page Background */
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  background: url("images/camo.png") no-repeat center center fixed;
+  background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* Semi-transparent overlay for readability */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65);
+  z-index: -1;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  padding: 30px;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Card */
+.form-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.6);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.form-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.75);
+}
+
+/* Fieldset */
+fieldset {
+  border: 2px solid #1e4726;
+  border-radius: 12px;
+  padding: 20px;
+}
+legend {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #000000;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 3px #000;
+  padding: 0 10px;
+}
+
+/* Labels */
+label.form-label {
+  font-weight: 600;
+  color: #222;
+}
+
+/* Input + Select */
+.form-control, .form-select {
+  border-radius: 8px;
+  border: 1px solid #bbb;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+.form-control:focus, .form-select:focus {
+  border-color: #218838;
+  box-shadow: 0 0 10px rgba(33,136,56,0.6);
+}
+
+/* Checkbox & Radio */
+.form-check-label {
+  font-weight: 500;
+}
+.form-check-input:checked {
+  background-color: #218838;
+  border-color: #218838;
+}
+
+/* Heading */
+h1 {
+  font-family: "Luckiest Guy", cursive;
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 4px;
+  color: #aabd04;
+  text-shadow: 3px 3px 10px #000,
+               0 0 15px rgba(0,0,0,0.8);
+  animation: fadeInDown 1s ease;
+}
+
+/* Submit Button */
+button[type="submit"] {
+  background: linear-gradient(90deg, #195a28, #218838);
+  border: none;
+  padding: 14px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  border-radius: 10px;
+  color: #fff;
+  transition: all 0.3s ease;
+}
+button[type="submit"]:hover {
+  background: linear-gradient(90deg, #218838, #195a28);
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(20px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+@keyframes fadeInDown {
+  from {opacity: 0; transform: translateY(-30px);}
+  to {opacity: 1; transform: translateY(0);}
+}
+
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1 class="text-center mb-4 fw-bold">E-Dossier Form</h1>
+
+
+    <form action="insert.php" method="POST">
+
+      <!-- 1. Personal Details -->
+      <div class="form-card">
+        <fieldset>
+          <legend>1. Personal Details</legend>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">Army No</label>
+              <input type="text" class="form-control" name="army_no" placeholder="Ex. A1234567Z / 12345678A / JC-123456B" pattern="^(?:[Aa]\d{7}[A-Za-z]|\d{8}[A-Za-z]|[Jj][Cc]-\d{6}[A-Za-z])$" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Rank</label>
+              <select class="form-select" name="rank" required>
+                <option value="">Select</option>
+                <option>AV</option><option>SIGM</option><option>L/NK</option>
+                <option>NK</option><option>HAV</option><option>NB SUB</option>
+                <option>SUB</option><option>SM</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Trade</label>
+              <select class="form-select" name="trade" required>
+                <option value="">Select</option>
+                <option>LMN</option><option>OCC</option><option>TTC</option>
+                <option>OSS</option><option>JENE</option><option>DMV</option><option>TRADESMAN</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Name</label>
+              <input type="text" class="form-control" name="name" required>
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Home Address</label>
+              <textarea class="form-control" name="home_address" rows="2"></textarea>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Date of Enrollment</label>
+              <input type="date" class="form-control" name="doe">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Date of Seniority</label>
+              <input type="date" class="form-control" name="dos">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Appt (if any)</label>
+              <select class="form-select" name="appt">
+                <option value="">Select</option>
+                <option>L/NK</option><option>Loc/HAV</option><option>CHM</option>
+                <option>CQ</option><option>RHM</option><option>NONE</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">I-Card No</label>
+              <input type="text" class="form-control" name="icard_no">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Date of Issue</label>
+              <input type="date" class="form-control" name="doi">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Issuing Authority</label>
+              <select class="form-select" name="issuing_auth">
+                <option value="">Select</option>
+                <option>CO 3MTR</option>
+                <option>COMDT 1STC</option>
+              </select>
+            </div>
+
+            <!-- Medical Category -->
+            <div class="col-md-12">
+              <label class="form-label d-block">Medical Category</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medical_cat[]" value="S">
+                <label class="form-check-label">S</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medical_cat[]" value="H">
+                <label class="form-check-label">H</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medical_cat[]" value="A">
+                <label class="form-check-label">A</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medical_cat[]" value="P">
+                <label class="form-check-label">P</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="medical_cat[]" value="E">
+                <label class="form-check-label">E</label>
+              </div>
+              <input type="text" class="form-control mt-2" name="medical_specific" placeholder="Enter specific category details">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Height (cm)</label>
+              <input type="number" class="form-control" id="height" name="height">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Weight (kg)</label>
+              <input type="number" class="form-control" id="weight" name="weight">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Overweight Percentage (%)</label>
+              <input type="number" class="form-control" id="overweight" name="overweight" >
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- 2. Family Details -->
+      <div class="form-card">
+        <fieldset>
+          <legend>2. Family Details</legend>
+          <div class="row g-3">
+           <!-- Father Name -->
+<div class="col-md-4">
+  <label class="form-label">Father's Name</label>
+  <input type="text" class="form-control" name="father_name" required>
+</div>
+<div class="col-md-4">
+  <label class="form-label">Part-II Number (Father)</label>
+  <input type="text" class="form-control" name="father_pt2_no">
+</div>
+<div class="col-md-4">
+  <label class="form-label">Part-II Date (Father)</label>
+  <input type="date" class="form-control" name="father_pt2_date">
+</div>
+
+<!-- Mother Name -->
+<div class="col-md-4">
+  <label class="form-label">Mother's Name</label>
+  <input type="text" class="form-control" name="mother_name" required>
+</div>
+<div class="col-md-4">
+  <label class="form-label">Part-II Number (Mother)</label>
+  <input type="text" class="form-control" name="mother_pt2_no">
+</div>
+<div class="col-md-4">
+  <label class="form-label">Part-II Date (Mother)</label>
+  <input type="date" class="form-control" name="mother_pt2_date">
+</div>
+            <div class="col-md-4">
+              <label class="form-label">Marital Status</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marital_status" value="Single">
+                <label class="form-check-label">Single</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="marital_status" value="Married">
+                <label class="form-check-label">Married</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- NOK Details -->
+          <div class="row g-3 mt-3">
+            <div class="col-md-4">
+              <label class="form-label">NOK Details</label>
+              <input type="text" class="form-control" name="nok_details" placeholder="Enter NOK Name">
+            </div>
+          </div>
+
+          <!-- Married Fields -->
+          <div id="marriedFields" class="row g-3 mt-3" style="display:none;">
+            <div class="col-md-4">
+              <label class="form-label">Spouse Name</label>
+              <input type="text" class="form-control" name="spouse_name">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Date of Marriage</label>
+              <input type="date" class="form-control" name="dom">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Pt-II Order No</label>
+              <input type="text" class="form-control" name="pt2_no">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Pt-II Order Date</label>
+              <input type="date" class="form-control" name="pt2_date">
+            </div>
+          </div>
+
+          <!-- Children Details -->
+          <div class="mt-4">
+            <div class="mb-3">
+              <label class="form-label">Number of Children</label>
+              <select class="form-select" id="numChildren" name="num_children">
+                <option value="">Select</option>
+                <option value="0">NONE</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+            <div id="childrenDetails"></div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Civil Qualification -->
+      <div class="form-card">
+        <fieldset>
+          <legend>3. Civil Qualification</legend>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Education Level</label>
+              <select class="form-select" name="education_level" required>
+                <option value="">Select</option>
+                <option>10th</option>
+                <option>12th</option>
+                <option>Diploma</option>
+                <option>Graduation</option>
+                <option>Post Graduation</option>
+                <option>Professional Course</option>
+                <option>PhD</option>
+                <option>Others</option>
+              </select>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Passing Year</label>
+              <input type="number" class="form-control" name="passing_year" min="1900" max="2099" required>
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Result</label>
+              <input type="text" class="form-control" name="result" placeholder="e.g. First Class" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">University Name</label>
+              <input type="text" class="form-control" name="university_name">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">College / School Name</label>
+              <input type="text" class="form-control" name="college_name">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Military Qualification -->
+      <div class="form-card">
+        <fieldset>
+          <legend>4. Military Qualification</legend>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">JN Cadre</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jn_cadre" value="Yes" required>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="jn_cadre" value="No">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">N Cadre</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="n_cadre" value="Yes" required>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="n_cadre" value="No">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">MR</label>
+              <select class="form-select" name="mr" required>
+                <option value="">Select</option>
+                <option>STD-I</option>
+                <option>STD-II</option>
+                <option>STD-III</option>
+                <option>None</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Upgrading Class</label>
+              <select class="form-select" name="upgrading_class" required>
+                <option value="">Select</option>
+                <option>Class-I</option>
+                <option>Class-II</option>
+                <option>Class-III</option>
+                <option>None</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Driving License</label><br>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driving_license" value="Yes" required>
+                <label class="form-check-label">Yes</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" name="driving_license" value="No">
+                <label class="form-check-label">No</label>
+              </div>
+            </div>
+            <div class="col-md-4">
+  <label class="form-label">Hill Driving License</label><br>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="hill_driving" value="Yes" required>
+    <label class="form-check-label">Yes</label>
+  </div>
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="radio" name="hill_driving" value="No">
+    <label class="form-check-label">No</label>
+  </div>
+</div>
+
+            
+            <div class="col-md-6">
+              <label class="form-label">Additional Course (if any)</label>
+              <input type="text" class="form-control" name="additional_course">
+            </div>
+            <div class="col-md-6">
+              <label class="form-label">Lacking Qualification (if any)</label>
+              <input type="text" class="form-control" name="language_qualification">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Physical Standards -->
+      <div class="form-card">
+        <fieldset>
+          <legend>5. Physical Standards</legend>
+          <div class="row g-3">
+            <div class="col-md-3">
+              <label class="form-label">PPT Date</label>
+              <input type="date" class="form-control" name="ppt_date" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">PPT Result</label>
+              <select class="form-select" name="ppt_result" required>
+                <option value="">Select</option>
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Satisfactory</option>
+                <option>Fail</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">BPET Date</label>
+              <input type="date" class="form-control" name="bpet_date" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">BPET Result</label>
+              <select class="form-select" name="bpet_result" required>
+                <option value="">Select</option>
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Satisfactory</option>
+                <option>Fail</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Firing Date</label>
+              <input type="date" class="form-control" name="firing_date" required>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Firing Result</label>
+              <select class="form-select" name="firing_result" required>
+                <option value="">Select</option>
+                <option>Marksman</option>
+                <option>Excellent</option>
+                <option>Good</option>
+                <option>Satisfactory</option>
+              </select>
+            </div>
+                        <!-- Sports as checkboxes -->
+            <div class="col-md-12">
+              <label class="form-label d-block">Sports (If Any)</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Boxing">
+                <label class="form-check-label">Boxing</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Wrestling">
+                <label class="form-check-label">Wrestling</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Football">
+                <label class="form-check-label">Football</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Basketball">
+                <label class="form-check-label">Basketball</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Hockey">
+                <label class="form-check-label">Hockey</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Athletics">
+                <label class="form-check-label">Athletics</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Volleyball">
+                <label class="form-check-label">Volleyball</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" name="sports[]" value="Kabaddi">
+                <label class="form-check-label">Kabaddi</label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- 6. Bank Details -->
+      <div class="form-card">
+        <fieldset>
+          <legend>6. Bank Details</legend>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">DSP Account No</label>
+              <input type="text" class="form-control" name="dsp_account" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Joint Account No</label>
+              <input type="text" class="form-control" name="joint_account" required>
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Bank Name</label>
+              <input type="text" class="form-control" name="bank_name" required>
+            </div>
+
+            
+            <div class="col-md-3">
+              <label class="form-label">Type of Loan</label>
+              <input type="text" class="form-control" name="loan_type">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Amount</label>
+              <input type="number" class="form-control" name="loan_amount">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">EMI</label>
+              <input type="number" class="form-control" name="loan_emi">
+            </div>
+            <div class="col-md-2">
+              <label class="form-label">Duration (Months)</label>
+              <input type="number" class="form-control" name="loan_duration">
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">% of Basic Pay</label>
+              <input type="number" class="form-control" name="loan_percentage">
+            </div>
+          </div>
+        </fieldset>
+      </div>
+      <!-- punishment -->
+      <div class="form-card">
+        <fieldset>
+          <legend>7. Punishment Details</legend>
+          <div class="row g-3">
+            <div class="col-md-4">
+              <label class="form-label">Red Ink Entry</label>
+              <input type="number" class="form-control" name="red_ink">
+            </div>
+            <div class="col-md-4">
+              <label class="form-label">Black Ink Entry</label>
+              <input type="number" class="form-control" name="black_ink">
+            </div>
+            <div class="col-md-12">
+              <label class="form-label">Punishment</label>
+              <textarea class="form-control" name="punishment" rows="3"></textarea>
+            </div>
+          </div>
+        </fieldset>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit"  class="btn btn-primary w-100">Submit</button>
+    </form>
+  </div>
+
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <script>
+    // Marital status toggle
+    document.addEventListener('DOMContentLoaded', function () {
+      const radios = document.querySelectorAll('input[name="marital_status"]');
+      const marriedFields = document.getElementById('marriedFields');
+
+      if (!marriedFields) return;
+
+      const spouseInputs = marriedFields.querySelectorAll('input, select, textarea');
+
+      function updateMarriedFields() {
+        const checked = document.querySelector('input[name="marital_status"]:checked');
+        const isMarried = checked && checked.value === 'Married';
+
+        marriedFields.style.display = isMarried ? '' : 'none';
+
+        spouseInputs.forEach(el => {
+          if (['spouse_name','dom','pt2_no','pt2_date'].includes(el.name)) {
+            el.required = isMarried;
+          }
+        });
+      }
+
+      radios.forEach(radio => radio.addEventListener('change', updateMarriedFields));
+      updateMarriedFields();
+    });
+
+    // Children fields dynamic rendering
+    const numChildrenSelect = document.getElementById('numChildren');
+    const childrenDetailsDiv = document.getElementById('childrenDetails');
+
+    numChildrenSelect.addEventListener('change', () => {
+      childrenDetailsDiv.innerHTML = '';
+      const count = parseInt(numChildrenSelect.value) || 0;
+
+      for (let i = 1; i <= count; i++) {
+        const childBlock = document.createElement('div');
+        childBlock.classList.add('row','g-3','mb-3');
+        childBlock.innerHTML = `
+          <h5 class="text-primary">Child ${i}</h5>
+          <div class="col-md-4">
+            <label class="form-label">Name of Child</label>
+            <input type="text" class="form-control" name="child_name_${i}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" name="child_dob_${i}" required>
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Pt-II Order No</label>
+            <input type="text" class="form-control" name="child_pt2no_${i}">
+          </div>
+          <div class="col-md-4">
+            <label class="form-label">Pt-II Order Date</label>
+            <input type="date" class="form-control" name="child_pt2date_${i}">
+          </div>
+        `;
+        childrenDetailsDiv.appendChild(childBlock);
+      }
+    });
+    
+  </script>
+</body>
+</html>
